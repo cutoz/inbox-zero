@@ -36,6 +36,11 @@ spec:
         {{- include "inbox-zero.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: redis
     spec:
+      automountServiceAccountToken: false
+      {{- with .Values.redis.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- if not .Values.redis.persistence.enabled }}
       volumes:
         - name: data

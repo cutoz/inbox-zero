@@ -22,6 +22,11 @@ spec:
             app.kubernetes.io/component: cron
         spec:
           restartPolicy: OnFailure
+          automountServiceAccountToken: false
+          {{- with $.Values.cron.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           containers:
             - name: curl
               image: "{{ $.Values.cron.image.repository }}:{{ $.Values.cron.image.tag }}"

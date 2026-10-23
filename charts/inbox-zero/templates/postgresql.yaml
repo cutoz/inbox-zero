@@ -35,6 +35,11 @@ spec:
         {{- include "inbox-zero.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: postgresql
     spec:
+      automountServiceAccountToken: false
+      {{- with .Values.postgresql.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- if not .Values.postgresql.persistence.enabled }}
       volumes:
         - name: data

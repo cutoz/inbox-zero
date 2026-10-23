@@ -59,6 +59,7 @@ migrations:
   hookDeletePolicy: before-hook-creation,hook-succeeded
   backoffLimit: 2
   activeDeadlineSeconds: 420
+  nodeSelector: {}
   resources:
     requests:
       cpu: 100m
@@ -146,6 +147,7 @@ postgresql:
     enabled: true
     size: 20Gi
     storageClass: ""
+  nodeSelector: {}
   resources:
     requests:
       cpu: 100m
@@ -188,6 +190,7 @@ redis:
     enabled: true
     size: 5Gi
     storageClass: ""
+  nodeSelector: {}
   resources:
     requests:
       cpu: 100m
@@ -197,6 +200,7 @@ redis:
 
 redisHttp:
   enabled: true
+  nodeSelector: {}
   image:
     repository: hiett/serverless-redis-http
     tag: latest
@@ -224,6 +228,7 @@ worker:
 
 cron:
   enabled: true
+  nodeSelector: {}
   image:
     repository: curlimages/curl
     tag: "8.17.0"
