@@ -1,43 +1,90 @@
 import type { Metadata } from "next";
 
+const PRIVACY_CONTACT = "dev@taar.ai";
+
 export const metadata: Metadata = {
   title: "Privacy | Inbox Zero Private",
-  robots: { index: false, follow: false },
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="mx-auto max-w-2xl px-6 py-12 text-sm leading-7">
-      <h1 className="mb-6 text-3xl font-semibold">Inbox Zero Private: data handling</h1>
+    <main className="mx-auto max-w-3xl px-6 py-12 text-sm leading-7">
+      <h1 className="mb-6 text-3xl font-semibold">
+        Inbox Zero Private: privacy and data handling
+      </h1>
       <p className="mb-4">
-        This is a private, self-hosted email application for its authorised
-        account owner. For questions or a request to disconnect an account,
-        use the support email shown on the provider consent screen.
+        This notice describes the private Inbox Zero deployment at i33.taar.ltd.
+        It is operated by Taar for its authorised account owner. Contact{" "}
+        <a className="underline" href={`mailto:${PRIVACY_CONTACT}`}>
+          {PRIVACY_CONTACT}
+        </a>{" "}
+        with questions, access requests, or deletion requests.
       </p>
-      <h2 className="mb-2 mt-8 text-xl font-semibold">Access to mail</h2>
+      <h2 className="mb-2 mt-8 text-xl font-semibold">
+        Data we collect and why
+      </h2>
       <p>
-        You sign in through Google or Microsoft. The application receives OAuth
-        tokens, not your provider password. Its requested permissions can read
-        and modify mail and mailbox settings. Google&apos;s Gmail permission can
-        also compose and send mail. Connecting an account requires your consent
-        at the provider.
+        You sign in with Google or Microsoft. We receive account identity, email
+        address, and OAuth access and refresh tokens, never your provider
+        password. We use those tokens to connect your mailbox and maintain your
+        session. The app can read message headers and bodies, attachments when
+        needed for a feature, labels or folders, and mailbox settings. It uses
+        this data to display, search, and organise mail and to apply actions you
+        request. It can store preferences, rules, drafts, and action history.
       </p>
-      <h2 className="mb-2 mt-8 text-xl font-semibold">Stored data</h2>
+      <h2 className="mb-2 mt-8 text-xl font-semibold">
+        Permissions and control
+      </h2>
       <p>
-        The server stores encrypted provider tokens, account configuration,
-        message metadata, and content you create or generate in the app, such
-        as drafts and rules. It may temporarily cache message content while
-        processing mail. The provider remains the source of your mailbox.
-        Some email content may be stored in the app database when you use
-        features that save it. The server is hosted by the deployment operator.
+        Google permissions include reading and changing mail and Gmail settings.
+        The Gmail mail permission also permits composing and sending mail,
+        although automated sending is disabled in this deployment. Microsoft
+        permissions cover reading and changing mail and mailbox settings; its
+        app registration does not include Mail.Send. You approve these
+        permissions at the provider before any mailbox is connected. You can
+        revoke access in your Google or Microsoft account settings at any time.
       </p>
-      <h2 className="mb-2 mt-8 text-xl font-semibold">Sharing and control</h2>
+      <h2 className="mb-2 mt-8 text-xl font-semibold">Storage and security</h2>
       <p>
-        The application exchanges data with Google or Microsoft to provide
-        the connected mailbox. Optional AI integrations can send selected mail
-        content to their provider if enabled. You can revoke the connection
-        from your Google or Microsoft account settings and request deletion of
-        data held by this deployment through the contact above.
+        The server stores encrypted OAuth tokens, account settings, message
+        metadata, and content created or saved by app features. Message bodies
+        are fetched for processing and may be cached temporarily; some content
+        can persist in saved drafts, rules, and related app records. Database
+        backups are encrypted and kept in private object storage for seven days.
+        The mailbox provider remains the source of your original messages.
+        Access to this deployment is restricted to approved accounts.
+      </p>
+      <h2 className="mb-2 mt-8 text-xl font-semibold">
+        Service providers and sharing
+      </h2>
+      <p>
+        The app exchanges mailbox data with Google or Microsoft to provide
+        requested features. Cloudflare handles traffic to the website and
+        encrypted backups; Taar&apos;s server hosts the app and database. AI
+        integrations and external API actions are disabled in this deployment,
+        so mail content is not sent to an AI provider by this configuration. We
+        do not sell mailbox data or use Google user data for advertising. Use of
+        information received from Google APIs follows the{" "}
+        <a
+          className="underline"
+          href="https://developers.google.com/terms/api-services-user-data-policy"
+        >
+          Google API Services User Data Policy
+        </a>
+        , including its Limited Use requirements.
+      </p>
+      <h2 className="mb-2 mt-8 text-xl font-semibold">
+        Retention and deletion
+      </h2>
+      <p>
+        App records remain until removed by the operator or requested for
+        deletion. To disconnect an account or delete its app data, email{" "}
+        <a className="underline" href={`mailto:${PRIVACY_CONTACT}`}>
+          {PRIVACY_CONTACT}
+        </a>
+        . Revoking provider access stops new mailbox retrieval; contact us as
+        well to remove existing app records. Encrypted backup copies age out
+        after their seven-day retention period.
       </p>
     </main>
   );

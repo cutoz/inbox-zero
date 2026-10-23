@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Testimonials } from "@/components/new-landing/sections/Testimonials";
 import { Hero, HeroContent } from "@/app/(landing)/home/Hero";
 import { Pricing } from "@/components/new-landing/sections/Pricing";
@@ -21,17 +22,43 @@ import { SectionLink } from "@/components/new-landing/common/SectionLink";
 import { env } from "@/env";
 import { BRAND_NAME } from "@/utils/branding";
 
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  verification: {
+    google: "fgcPdlurkHfpPNM6RPD7tDIjBCTT29gzSiLiqyKnaxI",
+  },
+};
 
 export default function NewLanding() {
   if (env.NEXT_PUBLIC_BYPASS_PREMIUM_CHECKS) {
     return (
-      <BasicLayout>
-        <Hero
-          title={`${BRAND_NAME} for self-hosted teams`}
-          subtitle={`Deploy ${BRAND_NAME} on your own infrastructure and automate your inbox with full data control.`}
-        />
-      </BasicLayout>
+      <main className="mx-auto max-w-3xl px-6 py-16 leading-7">
+        <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+          Private self-hosted email client
+        </p>
+        <h1 className="mt-4 text-4xl font-semibold">{BRAND_NAME}</h1>
+        <p className="mt-6 text-lg">
+          {BRAND_NAME} connects an authorised Google or Microsoft mailbox to a
+          private email workspace. It helps the account owner read, organise,
+          search, and manage messages and mailbox settings from one place.
+        </p>
+        <p className="mt-4">
+          This deployment is restricted to its approved accounts. Connecting a
+          mailbox requires the account owner to review and approve the
+          permissions on Google or Microsoft. The application never asks for the
+          mailbox password.
+        </p>
+        <p className="mt-4">
+          Mail data and account settings are processed on the operator&apos;s
+          self-hosted server. AI features and automated sending are disabled in
+          this deployment. Read the privacy notice for the data stored and the
+          providers involved.
+        </p>
+        <nav className="mt-8 flex flex-wrap gap-5 underline underline-offset-4">
+          <Link href="/login">Sign in</Link>
+          <Link href="/privacy">Privacy and data handling</Link>
+        </nav>
+      </main>
     );
   }
 
